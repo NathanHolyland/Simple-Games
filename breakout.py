@@ -1,8 +1,10 @@
 import pygame
 from math import *
+import tkinter
 import random
 import time
-resolution = [1600, 900]
+root = tkinter.Tk()
+resolution = [root.winfo_screenwidth(), root.winfo_screenheight()]
 screen = pygame.display.set_mode(resolution)
 
 global extraBalls
@@ -240,8 +242,8 @@ for j in range(numberDown):
 
 running = True
 paused = False
-paddle = Paddle(760, 850, 80, 20, (255, 255, 255))
-ball = Ball(800, 500, 10, (255, 0, 0))
+paddle = Paddle(resolution[0]/2-40, resolution[1]-100, 80, 20, (255, 255, 255))
+ball = Ball(resolution[0]/2-5, resolution[1]-400, 10, (255, 0, 0))
 ball.changeVelocity([0, 2])
 
 extraBalls = []
