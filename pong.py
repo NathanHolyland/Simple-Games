@@ -1,12 +1,6 @@
 import pygame
 from random import randrange
-import time
-
-pygame.init()
-screen = pygame.display.set_mode((1600, 900))
-pygame.display.set_caption("Pong")
-font = pygame.font.SysFont("Bernard MT", 40)
-
+import tkinter
 
 class Paddle:
     def __init__(self, rect, color):
@@ -83,8 +77,8 @@ class Ball:
             self.yVelocity = 0
             self.xVelocity = randrange(-1, 2, 2) * self.speed
             self.color = (255, 255, 255)
-            paddle1.setY(400)
-            paddle2.setY(400)
+            paddle1.setY(resolution[1]/2-(paddle1.h/2))
+            paddle2.setY(resolution[1]/2-(paddle2.h/2))
         if not (0 < self.y < screen.get_height()):
             self.yVelocity = self.yVelocity * -1
         self.x = self.x + self.xVelocity
@@ -151,8 +145,15 @@ def detectCollision(paddle1rect, paddle2rect, ball):
                 ball.setColor((255, 0, 0))
 
 
-pRect = (60, 400, 20, 100)
-cRect = (1520, 400, 20, 100)
+pygame.init()
+root = tkinter.Tk()
+resolution = [root.winfo_screenwidth(), root.winfo_screenheight()]
+screen = pygame.display.set_mode(resolution)
+pygame.display.set_caption("Pong")
+font = pygame.font.SysFont("Bernard MT", 40)
+
+pRect = (resolution[0]*(60/1600), (resolution[1]/2)-resolution[1]*100/1800, resolution[0]*20/1600, resolution[1]*100/900)
+cRect = (resolution[0]*(1520/1600), (resolution[1]/2)-10-resolution[1]*100/1800, resolution[0]*20/1600, resolution[1]*100/900)
 player = Paddle(pRect, (255, 255, 255))
 computer = Paddle(cRect, (255, 255, 255))
 
