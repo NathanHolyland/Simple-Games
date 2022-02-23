@@ -148,7 +148,7 @@ def detectCollision(paddle1rect, paddle2rect, ball):
 pygame.init()
 root = tkinter.Tk()
 resolution = [root.winfo_screenwidth(), root.winfo_screenheight()]
-screen = pygame.display.set_mode(resolution)
+screen = pygame.display.set_mode(resolution, pygame.RESIZABLE)
 pygame.display.set_caption("Pong")
 font = pygame.font.SysFont("Bernard MT", 40)
 
@@ -167,6 +167,9 @@ playerSpeed = 1
 running = True
 
 while running:
+    surface = pygame.display.get_surface()
+    w, h = surface.get_size()
+    resolution = [w, h]
     screen.fill((0, 0, 0))
     player.draw()
     computer.draw()
